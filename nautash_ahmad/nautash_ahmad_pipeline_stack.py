@@ -45,36 +45,36 @@ class NautashAhmadPipelineStack(Stack):
         # Ref: https://lzygo1995.medium.com/how-to-export-and-import-stack-output-values-in-cdk-ff3e066ca6fc
         gateway_url = Fn.import_value('CfnRestApiGatewayUrlVar')
         
-        pyresttest_build_step = pipelines.CodeBuildStep('PyresttestPipelineCodeBuildStep', commands=[],
-            build_environment=aws_codebuild_.BuildEnvironment(
-                build_image=aws_codebuild_.LinuxBuildImage.from_asset(self, "Image", directory='./pyresttest').from_docker_registry(name='docker:dind'),
-                privileged=True
-            ),
-            partial_build_spec=aws_codebuild_.BuildSpec.from_object({
-                "version": 0.2,
-                "phases": {
-                    "install": {
-                        "commands": [
-                            "nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://127.0.0.1:2375 --storage-driver=overlay2 &",
-                            "timeout 15 sh -c \"until docker info; do echo .; sleep 1; done\""
-                        ]
-                    },
-                    "pre_build": {
-                        "commands": [
-                        	"cd pyresttest/",
-                            f"echo Printing API URL https://19mivpfjlf.execute-api.us-east-2.amazonaws.com/prod",
-                            f"docker build -t pyresttest --build-arg url=https://19mivpfjlf.execute-api.us-east-2.amazonaws.com/prod --build-arg file=rest_api_functional_test.yml ."
-                        ]
-                    },
-                    "build": {
-                        "commands": [
-                            "docker images",
-                            "docker container run pyresttest"
-                        ]
-                    }
-                }
-            })
-        )
+        # pyresttest_build_step = pipelines.CodeBuildStep('PyresttestPipelineCodeBuildStep', commands=[],
+        #     build_environment=aws_codebuild_.BuildEnvironment(
+        #         build_image=aws_codebuild_.LinuxBuildImage.from_asset(self, "Image", directory='./pyresttest').from_docker_registry(name='docker:dind'),
+        #         privileged=True
+        #     ),
+        #     partial_build_spec=aws_codebuild_.BuildSpec.from_object({
+        #         "version": 0.2,
+        #         "phases": {
+        #             "install": {
+        #                 "commands": [
+        #                     "nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://127.0.0.1:2375 --storage-driver=overlay2 &",
+        #                     "timeout 15 sh -c \"until docker info; do echo .; sleep 1; done\""
+        #                 ]
+        #             },
+        #             "pre_build": {
+        #                 "commands": [
+        #                 	"cd pyresttest/",
+        #                     f"echo Printing API URL https://19mivpfjlf.execute-api.us-east-2.amazonaws.com/prod",
+        #                     f"docker build -t pyresttest --build-arg url=https://19mivpfjlf.execute-api.us-east-2.amazonaws.com/prod --build-arg file=rest_api_functional_test.yml ."
+        #                 ]
+        #             },
+        #             "build": {
+        #                 "commands": [
+        #                     "docker images",
+        #                     "docker container run pyresttest"
+        #                 ]
+        #             }
+        #         }
+        #     })
+        # )
         
         # Adding stages to pipeline
         # https://docs.aws.amazon.com/cdk/api/v1/python/aws_cdk.core/Stage.html
@@ -92,8 +92,6 @@ class NautashAhmadPipelineStack(Stack):
                 'pip install -r requirements-dev.txt',
                 'pytest'
             ])
-        ], post=[
-            pyresttest_build_step
         ])
         
         # Adding manual approval
