@@ -193,7 +193,8 @@ class NautashAhmadStack(Stack):
             managed_policies=[
                 iam_.ManagedPolicy.from_aws_managed_policy_name("service-role/AWSLambdaBasicExecutionRole"),
                 iam_.ManagedPolicy.from_aws_managed_policy_name("CloudWatchFullAccess"),
-                iam_.ManagedPolicy.from_aws_managed_policy_name("AmazonDynamoDBFullAccess")
+                iam_.ManagedPolicy.from_aws_managed_policy_name("AmazonDynamoDBFullAccess"),
+                iam_.ManagedPolicy.from_aws_managed_policy_name("service-role/AWSCodePipelineServiceRole")
             ]
         )
         
