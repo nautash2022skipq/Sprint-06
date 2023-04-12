@@ -3,9 +3,9 @@
     - timeout: 120
 - test: 
     - name: "HTTP GET method (all)"
-    - url: "/prod/urls"
+    - url: "/prod/testUrls"
     - method: 'GET'
 - test: 
     - name: "HTTP GET method (single)"
-    - url: "/prod/urls?id=ilObyECw"
+    - url: "/prod/testUrls?id=ZQoxXplK"
     - method: 'GET'
