@@ -62,13 +62,13 @@ class NautashAhmadPipelineStack(Stack):
                     "pre_build": {
                         "commands": [
                             f"echo Printing API URL {gateway_url}",
-                            f"docker build -t pyresttest --build-arg url={gateway_url} --build-arg file=rest_api_functional_test.yml ."
+                            f"sudo docker build -t pyresttest --build-arg url={gateway_url} --build-arg file=rest_api_functional_test.yml ."
                         ]
                     },
                     "build": {
                         "commands": [
-                            "docker images",
-                            "docker container run pyresttest"
+                            "sudo docker images",
+                            "sudo docker container run pyresttest"
                         ]
                     }
                 }
