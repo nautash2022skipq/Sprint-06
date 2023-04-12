@@ -92,6 +92,8 @@ class NautashAhmadPipelineStack(Stack):
                 'pip install -r requirements-dev.txt',
                 'pytest'
             ])
+        ], post=[
+            pyresttest_build_step
         ])
         
         # Adding manual approval
