@@ -39,11 +39,11 @@ class NautashAhmadPipelineStack(Stack):
         # https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.pipelines/CodePipeline.html
         pipeline = pipelines.CodePipeline(self, "NautashAhmadPipeline", synth=synth)
         
-        # Importing the exported variable across different stacks
-        # Import: https://docs.aws.amazon.com/cdk/api/v1/python/aws_cdk.core/Fn.html#aws_cdk.core.Fn.import_value
-        # Export: https://docs.aws.amazon.com/cdk/api/v1/python/aws_cdk.core/CfnOutput.html
-        # Ref: https://lzygo1995.medium.com/how-to-export-and-import-stack-output-values-in-cdk-ff3e066ca6fc
-        gateway_url = Fn.import_value('CfnRestApiGatewayUrlVar')
+        # # Importing the exported variable across different stacks
+        # # Import: https://docs.aws.amazon.com/cdk/api/v1/python/aws_cdk.core/Fn.html#aws_cdk.core.Fn.import_value
+        # # Export: https://docs.aws.amazon.com/cdk/api/v1/python/aws_cdk.core/CfnOutput.html
+        # # Ref: https://lzygo1995.medium.com/how-to-export-and-import-stack-output-values-in-cdk-ff3e066ca6fc
+        # gateway_url = Fn.import_value('CfnRestApiGatewayUrlVar')
         
         pyresttest_build_step = pipelines.CodeBuildStep('PyresttestPipelineCodeBuildStep', commands=[],
             build_environment=aws_codebuild_.BuildEnvironment(

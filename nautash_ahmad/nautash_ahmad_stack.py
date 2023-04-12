@@ -155,10 +155,10 @@ class NautashAhmadStack(Stack):
         gw_resource.add_method('PUT', handler, authorization_type=api_gw_.AuthorizationType.NONE, api_key_required=False)
         gw_resource.add_method('DELETE', handler, authorization_type=api_gw_.AuthorizationType.NONE, api_key_required=False)
         
-        # Exporitng the API Gateway URL across other stacks by using 'export_name' flag
-        # https://docs.aws.amazon.com/cdk/api/v1/python/aws_cdk.core/CfnOutput.html
-        # Ref: https://lzygo1995.medium.com/how-to-export-and-import-stack-output-values-in-cdk-ff3e066ca6fc
-        CfnOutput(self, "CfnRestApiGatewayUrl", value=gw.url + resource_name, export_name='CfnRestApiGatewayUrlVar')
+        # # Exporitng the API Gateway URL across other stacks by using 'export_name' flag
+        # # https://docs.aws.amazon.com/cdk/api/v1/python/aws_cdk.core/CfnOutput.html
+        # # Ref: https://lzygo1995.medium.com/how-to-export-and-import-stack-output-values-in-cdk-ff3e066ca6fc
+        # CfnOutput(self, "CfnRestApiGatewayUrl", value=gw.url + resource_name, export_name='CfnRestApiGatewayUrlVar')
         
         # Constructing REST API Gateway URL
         # https://docs.aws.amazon.com/apigateway/latest/developerguide/create-api-resources-methods.html
